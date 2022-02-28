@@ -1,7 +1,29 @@
 package mypackage
 
-type BObject struct{}
+type IBObject interface {
+	BFunc()
+}
 
-func NewBObject() *BObject {
-	return &BObject{}
+type BObject struct {
+	b    int
+	cObj ICObject
+}
+
+type BInt int
+
+func NewBObject(b BInt, cObj ICObject) *BObject {
+	return &BObject{
+		b:    int(b),
+		cObj: cObj,
+	}
+}
+
+func (*BObject) BFunc() {}
+
+type ICObject interface{}
+
+type CObject struct{}
+
+func NewCObject() (*CObject, error) {
+	return &CObject{}, nil
 }
